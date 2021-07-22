@@ -1,0 +1,63 @@
+.createAccount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid wheat;
+  border-radius: 5px;
+  padding: 20px 20px 0px;
+}
+
+.createAccount__logo {
+  width: 10%;
+  min-width: 40px;
+  max-width: 80px;
+  user-select: none;
+  margin: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.form > * {
+  margin: 5px;
+}
+
+.form > input {
+  margin: 15px 10px 2px;
+  border-radius: 5px;
+  border: 1px solid #888;
+  padding: 5px 10px;
+}
+
+.form > small {
+  text-align: left;
+  margin: 0;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #f55c47;
+}
+
+.form > button {
+  padding: 4px 12px;
+  margin: 10px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #f55c47;
+  border-radius: 3px;
+  border: 1px solid #bbb;
+}
+
+.createAccount > p {
+  color: white;
+}
+
+.createAccount > p > span {
+  cursor: pointer;
+  color: #7289da;
+}
