@@ -1,9 +1,15 @@
 export const initialState = {
-  user: [],
+  user: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case "LOGIN_USER":
+      return {
+        ...state,
+        user: action.user,
+      };
+      break;
     default:
       return state;
   }

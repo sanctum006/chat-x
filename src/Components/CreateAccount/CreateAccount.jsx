@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import "./CreateAccount.css";
 import useFormValidator from "use-form-input-validator";
+import uniqueRandom from "unique-random";
+import "./CreateAccount.css";
 import { auth } from "./../../firebase";
+
+const random = uniqueRandom(1111, 9999);
 
 function CreateAccount({ setSignUp }) {
   const [info, setInfo] = useState({
@@ -47,6 +50,7 @@ function CreateAccount({ setSignUp }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    values.username = values.username + random();
     if (isAllFieldsValid()) {
       auth
         .createUserWithEmailAndPassword(values.email, values.password)

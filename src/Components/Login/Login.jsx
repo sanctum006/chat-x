@@ -1,16 +1,26 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { auth } from "../../firebase";
+import { useStateValue } from "../../StateProvider";
 import "./Login.css";
 
 function Login({ setSignUp }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [{ user }, dispatch] = useStateValue();
+  let history = useHistory();
 
   const handleChange1 = (e) => {
     setEmail(e.target.value);
-    console.log(email);
   };
   const handleChange2 = (e) => {
     setPassword(e.target.value);
+  };
+  const logUserIn = (e) => {
+    auth.signInWithEmailAndPassword(email, password).then((cred) => {
+      dispatch({ type: "LOGIN_USER", user: cred.user });
+      history.push("/edit-profile");
+    });
   };
   return (
     <div className="login">
@@ -32,7 +42,7 @@ function Login({ setSignUp }) {
           value={password}
           onChange={handleChange2}
         />
-        <button>Login</button>
+        <button onClick={logUserIn}>Login</button>
         <p onClick={() => setSignUp("createAccount")}>Create a new Account?</p>
       </div>
     </div>

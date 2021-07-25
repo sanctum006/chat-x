@@ -1,19 +1,24 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SignUp from "./../SignUp/SignUp";
+import EditProfile from "./../EditProfile/EditProfile.jsx";
 import { useState } from "react";
 import { useStateValue } from "../../StateProvider";
 
 function App() {
-  const [asd, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
-  const [user, setUser] = useState(null);
   return (
     <div className="app">
       <Router>
         {user ? (
           <Switch>
-            <Route path="/login">{/* <Login /> */}</Route>
+            <Route exact path="/">
+              <h1>Hello</h1>
+            </Route>
+            <Route path="/edit-profile">
+              <EditProfile />
+            </Route>
           </Switch>
         ) : (
           <SignUp />
