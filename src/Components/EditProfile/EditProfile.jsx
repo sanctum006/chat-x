@@ -28,10 +28,8 @@ function EditProfile() {
     setUser((u) => ({ ...u, bio: e.target.value }));
   };
 
-  const handleAvatarChange = () => {
-    let url = prompt("Enter URL");
-    console.log(user.avatarUrl);
-    setUser((u) => ({ ...u, avatarUrl: url }));
+  const handleAvatarChange = (e) => {
+    setUser((u) => ({ ...u, avatarUrl: e.target.value }));
   };
 
   const handleProfileChange = (e) => {
@@ -60,11 +58,22 @@ function EditProfile() {
                   src={user.avatarUrl}
                   alt="avt-img"
                   className="editProfile__avtImg"
-                  onClick={handleAvatarChange}
                 />
               </div>
-              <p>sanctum007</p>
+              <p>
+                {user.username}
+                <span>#{user.usernameid}</span>
+              </p>
             </div>
+            <span>Avatar:</span>
+            <input
+              type="text"
+              placeholder="Enter Your Bio..."
+              className="editProfile__bio"
+              value={user.avatarUrl}
+              onChange={handleAvatarChange}
+            />
+            <span>Bio:</span>
             <input
               type="text"
               placeholder="Enter Your Bio..."

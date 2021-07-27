@@ -1,9 +1,18 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import Login from "../Login/Login";
 import SignUp from "./../SignUp/SignUp";
 import EditProfile from "./../EditProfile/EditProfile.jsx";
 import { useState } from "react";
 import { useStateValue } from "../../StateProvider";
+import CreateAccount from "../CreateAccount/CreateAccount";
+import HomeScreen from "../HomeScreen/HomeScreen";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -11,18 +20,24 @@ function App() {
   return (
     <div className="app">
       <Router>
-        {user ? (
-          <Switch>
-            <Route exact path="/">
-              <h1>Hello</h1>
-            </Route>
+        <Switch>
+          <Route exact path="/">
+            {user ? <HomeScreen /> : <SignUp />}
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route path="/create-account">
+            <CreateAccount />
+          </Route>
+          {user ? (
             <Route path="/edit-profile">
               <EditProfile />
             </Route>
-          </Switch>
-        ) : (
-          <SignUp />
-        )}
+          ) : (
+            <Redirect to="/" />
+          )}
+        </Switch>
       </Router>
     </div>
   );

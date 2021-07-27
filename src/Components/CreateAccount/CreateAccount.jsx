@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import useFormValidator from "use-form-input-validator";
 import uniqueRandom from "unique-random";
+import { useHistory } from "react-router";
 import "./CreateAccount.css";
-import { auth } from "./../../firebase";
+import { auth, db } from "./../../firebase";
+import { Link } from "react-router-dom";
 
 const random = uniqueRandom(1111, 9999);
 
-function CreateAccount({ setSignUp }) {
+function CreateAccount() {
   const [info, setInfo] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const history = useHistory();
 
   const { values, errors, updateField, isAllFieldsValid } = useFormValidator({
     username: {
@@ -50,54 +54,77 @@ function CreateAccount({ setSignUp }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    values.username = values.username + random();
+    var uid;
     if (isAllFieldsValid()) {
       auth
         .createUserWithEmailAndPassword(values.email, values.password)
-        .then((authUser) => {})
+        .then((authUser) => {
+          db.collection("users").add({
+            username: values.username,
+            avatarUrl:
+              "https://cdn.discordapp.com/attachments/817706647274651659/865591208742223892/logo.png",
+            bio: "Hey There!!",
+            usernameid: random(),
+            uid: authUser.user.uid,
+          });
+          setTimeout(() => {
+            history.push("/login");
+          }, 1000);
+        })
         .catch((error) => alert(error));
     }
   };
   return (
-    <div className="createAccount">
-      <img
-        src="https://cdn.discordapp.com/attachments/817706647274651659/865591208742223892/logo.png"
-        alt=""
-        className="createAccount__logo"
-      />
-      <div className="form">
-        <input
-          name="username"
-          placeholder="Enter Username"
-          onChange={updateField}
+    <div className="createAccountScreen">
+      <div className="createAccount">
+        <img
+          src="https://cdn.discordapp.com/attachments/817706647274651659/865591208742223892/logo.png"
+          alt=""
+          className="createAccount__logo"
         />
-        <small>{errors.username}</small>
+        <div className="form">
+          <input
+            name="username"
+            placeholder="Enter Username"
+            onChange={updateField}
+          />
+          <small>{errors.username}</small>
 
-        <input name="email" placeholder="Enter Email" onChange={updateField} />
-        <small>{errors.email}</small>
+          <input
+            name="email"
+            placeholder="Enter Email"
+            onChange={updateField}
+          />
+          <small>{errors.email}</small>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          onChange={updateField}
-        />
-        <small>{errors.password}</small>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            onChange={updateField}
+          />
+          <small>{errors.password}</small>
 
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          onChange={updateField}
-        />
-        <small>{errors.confirmPassword}</small>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            onChange={updateField}
+          />
+          <small>{errors.confirmPassword}</small>
 
-        <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+        <p>
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", color: "#7289da" }}
+          >
+            Login
+          </Link>
+        </p>
       </div>
-      <p>
-        Already have an account?{" "}
-        <span onClick={() => setSignUp("login")}>Login</span>
-      </p>
     </div>
   );
 }

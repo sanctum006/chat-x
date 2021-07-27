@@ -43,19 +43,21 @@
 
 .editProfile__avtImg {
   border-radius: 100%;
-  width: 100%;
-  max-width: 100px;
-}
-
-.editProfile__avtImg:hover {
-  opacity: 0.6;
+  width: 100px;
+  height: 100px;
 }
 
 .editProfile__Container > input {
-  margin: 10px;
+  margin: 0 10px 10px;
   border-radius: 5px;
   border: 1px solid #888;
   padding: 5px 10px;
+}
+
+.editProfile__Container > span {
+  margin: 0 10px;
+  font-size: 0.9rem;
+  color: wheat;
 }
 
 .editProfile__updateBtn {
@@ -81,7 +83,11 @@
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  width: 100%;
-  max-width: 100px;
+  width: 100px;
   height: 100px;
+}
+
+.editProfile__innerContainer > p > span {
+  color: gray;
+  font-size: 0.8rem;
 }
