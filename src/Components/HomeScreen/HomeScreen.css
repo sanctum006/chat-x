@@ -1,15 +1,49 @@
 .homeScreen {
-  min-height: 100vh;
+  width: 100%;
+  height: 100vh;
   background-color: #424549;
   padding: 20px;
+  display: flex;
+  overflow: hidden;
 }
 
 .formContainer {
   background-color: #424549;
   width: 100%;
-  position: fixed;
+  padding: 20px;
+  /* position: fixed;
   z-index: 10;
   bottom: 0px;
+  left: 0; */
+}
+
+.homeScreen__chat {
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #5c6066;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 5px;
 }
 
 .homeScreen__form {
@@ -28,4 +62,18 @@
 
 .myMessage {
   text-align: right;
+}
+
+.homeScreen__left {
+  width: 300px;
+}
+
+.homeScreen__right {
+  height: 100vh;
+  background-color: #424549;
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* overflow: hidden; */
 }
