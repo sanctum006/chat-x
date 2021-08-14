@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="app">
-      <Router>
+      {/* <Router>
         <Switch>
           <Route exact path="/">
             {user ? <HomeScreen /> : <SignUp />}
@@ -38,7 +38,7 @@ function App() {
             <Redirect to="/" />
           )}
         </Switch>
-      </Router>
+      </Router> */}
     </div>
   );
 }
